@@ -1,4 +1,4 @@
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("SequenceConnector.Tests")]
+[assembly: InternalsVisibleTo("Microsoft365.Tests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]

@@ -1,4 +1,4 @@
-# Sequence® Connector Template
+# Sequence® Microsoft365 Connector
 
 [Sequence](https://gitlab.com/reductech/Sequence) is a collection of
 libraries that automates cross-application e-discovery and forensic workflows.
@@ -25,7 +25,7 @@ Documentation is available here: https://sequence.sh
 
 # Releases
 
-Can be downloaded from the [Releases page](https://gitlab.com/reductech/templates/sequenceconnector/-/releases).
+Can be downloaded from the [Releases page](https://gitlab.com/reductech/sequence/connectors/microsoft365/-/releases).
 
 # NuGet Packages
 

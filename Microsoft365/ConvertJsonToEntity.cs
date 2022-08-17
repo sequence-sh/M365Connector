@@ -13,7 +13,7 @@ using Reductech.Sequence.Core.Internal;
 using Reductech.Sequence.Core.Internal.Errors;
 using Entity = Reductech.Sequence.Core.Entity;
 
-namespace Reductech.Templates.SequenceConnector;
+namespace Reductech.Sequence.Connectors.Microsoft365;
 
 /// <summary>
 /// Convert an entity from a JSON stream. Clone of StructuredData.FromJSON.

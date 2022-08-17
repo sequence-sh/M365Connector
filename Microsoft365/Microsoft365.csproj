@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RootNamespace>Reductech.Sequence.Connectors.Microsoft365</RootNamespace>
+    <AssemblyName>Reductech.Sequence.Connectors.Microsoft365</AssemblyName>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <Nullable>enable</Nullable>
+    <Version>0.17.0$(VersionSuffix)</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Reductech.Sequence.Connectors.Microsoft365</PackageId>
+    <Title>Sequence Microsoft365 Connector</Title>
+    <Description>Sequence® Connector with steps to interact with the Microsoft 365 Graph API.</Description>
+    <Product>Sequence®</Product>
+    <PackageTags>ediscovery;forensics;edrm;automation;orchestration;sequence;microsoft365;office365</PackageTags>
+
+    <PackageProjectUrl>https://sequence.sh</PackageProjectUrl>
+    <RepositoryUrl>https://gitlab.com/reductech/sequence/connectors/microsoft365.git</RepositoryUrl>
+    <PackageReleaseNotes>https://gitlab.com/reductech/sequence/connectors/microsoft365/-/blob/master/CHANGELOG.md</PackageReleaseNotes>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <Authors>Reductech</Authors>
+    <Company>Reductech</Company>
+    <Copyright>Copyright (c) 2022 Reductech Ltd</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(CI)' != ''">
+    <!-- deterministic builds for Source Link -->
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Source Link and symbols -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../CHANGELOG.md" Pack="true" PackagePath="/" />
+    <None Include="../LICENSE" Pack="true" PackagePath="/" />
+    <None Include="../NOTICE" Pack="true" PackagePath="/" />
+    <None Include="../README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Reductech.Sequence.Core" Version="0.16.0">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <PropertyGroup Condition="$(PackConnector) != ''">
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseExpression></PackageLicenseExpression>
+  </PropertyGroup>
+
+  <Target Name="AddConnectorDependencies" BeforeTargets="GenerateNuspec" Condition="$(PackConnector) != ''">
+    <ItemGroup>
+      <_PackageFiles Include="@(RuntimeCopyLocalItems)" PackageFlatten="false" PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)/%(RecursiveDir)%(Filename)%(Extension)" />
+      <_PackageFiles Include="@(RuntimeTargetsCopyLocalItems)" PackageFlatten="false" PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)/$([System.Text.RegularExpressions.Regex]::Match(%(RuntimeTargetsCopyLocalItems.Identity), '.+(runtimes(\\|/).*)$').Groups[1].Value)" />
+      <_PackageFiles Include="$(OutputPath)$(AssemblyName).deps.json" PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)/$(AssemblyName).deps.json" />
+    </ItemGroup>
+  </Target>
+
+</Project>

@@ -3,7 +3,7 @@ using Reductech.Sequence.Core;
 using Reductech.Sequence.Core.Internal.Errors;
 using Reductech.Sequence.Core.TestHarness;
 
-namespace Reductech.Templates.SequenceConnector.Tests;
+namespace Reductech.Sequence.Connectors.Microsoft365.Tests;
 
 public partial class FromJsonTests : StepTestBase<ConvertJsonToEntity, Entity>
 {

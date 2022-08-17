@@ -2,6 +2,7 @@
 /label ~"wf::backlog"
 /label ~"area::connectors"
 /label ~sequence
+/label ~m365
 
 ## Story
 
