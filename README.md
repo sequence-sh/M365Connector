@@ -1,9 +1,10 @@
 # Sequence® Microsoft365 Connector
 
-[Sequence](https://gitlab.com/reductech/Sequence) is a collection of
-libraries that automates cross-application e-discovery and forensic workflows.
+[Sequence®](https://sequence.sh) is a collection of libraries for
+automation of cross-application e-discovery and forensic workflows.
 
-This connector contains Steps to interact with...
+This connector contains Steps to interact with the
+[Microsoft Graph API](https://developer.microsoft.com/en-us/graph).
 
 ## Steps
 
@@ -19,14 +20,40 @@ To check if a file exists and print the result:
 - Print (ConvertJsonToEntity '{"Foo":1}')
 ```
 
-## Documentation
+## Settings
 
-Documentation is available here: https://sequence.sh
+To use the Microsoft365 Connector you need to add a `settings` block to
+the `microsoft365` connector configuration in the `connectors.json` file:
 
-# Releases
+```json
+{
+  "Reductech.Sequence.Connectors.Microsoft365": {
+    "id": "Reductech.Sequence.Connectors.Microsoft365",
+    "version": "0.17.0",
+    "enabled": true,
+    "settings": {
+        ...
+    }
+  }
+}
+```
 
-Can be downloaded from the [Releases page](https://gitlab.com/reductech/sequence/connectors/microsoft365/-/releases).
+# Documentation
+
+https://sequence.sh
+
+# Download
+
+https://sequence.sh/download
+
+# Try SCL and Core
+
+https://sequence.sh/playground
+
+# Package Releases
+
+Can be downloaded from the [Releases page](https://gitlab.com/reductech/sequence/connectors/filesystem/-/releases).
 
 # NuGet Packages
 
-Are available in the [Reductech Nuget feed](https://gitlab.com/reductech/nuget/-/packages).
+Release nuget packages are available from [nuget.org](https://www.nuget.org/profiles/Sequence).
