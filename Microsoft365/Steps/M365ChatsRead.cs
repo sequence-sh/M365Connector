@@ -3,16 +3,16 @@
 namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
 
 /// <summary>
-/// Read a list of users from Microsoft 365
+/// Read User mail from Microsoft 365. 
 /// </summary>
-public class M365UsersRead : CompoundStep<Array<Entity>>
+public class M365ChatsRead : CompoundStep<Array<Entity>>
 {
     /// <inheritdoc />
     public override IEnumerable<Requirement> RuntimeRequirements
     {
         get
         {
-            yield return new GraphScopeRequirement("User.ReadBasic.All");
+            yield return new GraphScopeRequirement("Chat.Read");
         }
     }
 
@@ -36,25 +36,16 @@ public class M365UsersRead : CompoundStep<Array<Entity>>
         if (connection.IsFailure)
             return connection.ConvertFailure<Array<Entity>>();
 
-        var mailResults = await
-            connection.Value.GraphServiceClient.Users
-                .Request()
-                .Select(
-                    m => new
-                    {
-                        // Only request specific properties
-                        m.DisplayName,
-                        //m.UserPrincipalName,m.AboutMe, m.AgeGroup,
-                    }
-                )
-                // Get at most 25 results
-                .Top(take)
-                // Sort by received time, newest first
-                .OrderBy("DisplayName ASC")
-                .GetAsync(cancellationToken);
+        var chatResults = await connection.Value.GraphServiceClient
+            .Chats
+            .Request()
+            .Select(c => new { c.Topic, c.Members, c.Messages })
+            .Top(take)
+            //.OrderBy()
+            .GetAsync(cancellationToken);
 
         var entities =
-            mailResults.Select(x => x.ToEntity())
+            chatResults.Select(x => x.ToEntity())
                 .ToSCLArray();
 
         return entities;
@@ -69,5 +60,5 @@ public class M365UsersRead : CompoundStep<Array<Entity>>
 
     /// <inheritdoc />
     public override IStepFactory StepFactory { get; } =
-        new SimpleStepFactory<M365UsersRead, Array<Entity>>();
+        new SimpleStepFactory<M365ChatsRead, Array<Entity>>();
 }

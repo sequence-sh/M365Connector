@@ -21,7 +21,7 @@ public abstract partial class
                 //"user.read",
                 "mail.read",
                 //"mail.send",
-                "user.ReadBasic.all"
+                "user.ReadBasic.all", "Team.ReadBasic.all", "Chat.Read",
             }
         );
 

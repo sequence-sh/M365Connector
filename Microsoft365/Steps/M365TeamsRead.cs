@@ -3,16 +3,16 @@
 namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
 
 /// <summary>
-/// Read User mail from Microsoft 365. 
+/// Read a list of users from Microsoft 365
 /// </summary>
-public class M365MailRead : CompoundStep<Array<Entity>>
+public class M365TeamsRead : CompoundStep<Array<Entity>>
 {
     /// <inheritdoc />
     public override IEnumerable<Requirement> RuntimeRequirements
     {
         get
         {
-            yield return new GraphScopeRequirement("Mail.Read");
+            yield return new GraphScopeRequirement("Team.ReadBasic.All");
         }
     }
 
@@ -22,7 +22,6 @@ public class M365MailRead : CompoundStep<Array<Entity>>
         CancellationToken cancellationToken)
     {
         var data = await stateMonad.RunStepsAsync(
-            Folder.WrapStringStream(),
             Take,
             cancellationToken
         );
@@ -30,7 +29,7 @@ public class M365MailRead : CompoundStep<Array<Entity>>
         if (data.IsFailure)
             return data.ConvertFailure<Array<Entity>>();
 
-        var (folder, take) = data.Value;
+        var take = data.Value;
 
         var connection = await stateMonad.GetOrCreateGraphConnection(this, cancellationToken);
 
@@ -38,26 +37,25 @@ public class M365MailRead : CompoundStep<Array<Entity>>
             return connection.ConvertFailure<Array<Entity>>();
 
         var mailResults = await
-            connection.Value.GraphServiceClient.Me
-                .MailFolders[folder]
-                .Messages
+            connection.Value.GraphServiceClient.Teams
                 .Request()
                 .Select(
                     m => new
                     {
                         // Only request specific properties
-                        m.From,
-                        m.IsRead,
-                        m.ReceivedDateTime,
-                        m.Subject,
-                        m.Body,
+                        m.DisplayName, m.Description //, m.Members
+                        //m.UserPrincipalName,m.AboutMe, m.AgeGroup,
                     }
                 )
                 // Get at most 25 results
                 .Top(take)
                 // Sort by received time, newest first
-                .OrderBy("ReceivedDateTime DESC")
+                .OrderBy("DisplayName ASC")
                 .GetAsync(cancellationToken);
+
+        //Microsoft.Graph.ServiceException
+        //Code: NotFound
+        //Message: Requested API is not supported. Please check the path.
 
         var entities =
             mailResults.Select(x => x.ToEntity())
@@ -73,14 +71,7 @@ public class M365MailRead : CompoundStep<Array<Entity>>
     [DefaultValueExplanation("25")]
     public IStep<SCLInt> Take { get; set; } = new SCLConstant<SCLInt>(new SCLInt(25));
 
-    /// <summary>
-    /// The name of the Mail Folder
-    /// </summary>
-    [StepProperty(2)]
-    [DefaultValueExplanation("Inbox")]
-    public IStep<StringStream> Folder { get; set; } = new SCLConstant<StringStream>("Inbox");
-
     /// <inheritdoc />
     public override IStepFactory StepFactory { get; } =
-        new SimpleStepFactory<M365MailRead, Array<Entity>>();
+        new SimpleStepFactory<M365TeamsRead, Array<Entity>>();
 }
