@@ -5,7 +5,7 @@ namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
 /// <summary>
 /// Read User mail from Microsoft 365. 
 /// </summary>
-public class M365MailRead : CompoundStep<Array<Entity>>
+public sealed class M365MailRead : CompoundStep<Array<Entity>>
 {
     /// <inheritdoc />
     public override IEnumerable<Requirement> RuntimeRequirements

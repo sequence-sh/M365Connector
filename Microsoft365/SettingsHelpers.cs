@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using Azure.Identity;
-using CSharpFunctionalExtensions;
 using Microsoft.Extensions.Logging;
 using Reductech.Sequence.ConnectorManagement.Base;
 using Reductech.Sequence.Core.Abstractions;
 
 namespace Reductech.Sequence.Connectors.Microsoft365;
 
+/// <summary>
+/// Methods to help with Microsoft Graph settings
+/// </summary>
 public static class SettingsHelpers
 {
     /// <summary>
@@ -16,10 +17,10 @@ public static class SettingsHelpers
     internal static readonly VariableName GraphVariableName =
         new("ReductechGraphConnection");
 
-    public const string M365Key = "Reductech.Sequence.Connectors.Microsoft365";
+    private const string M365Key = "Reductech.Sequence.Connectors.Microsoft365";
 
     /// <summary>
-    /// Try to get a list of NuixSettings from the global settings Entity
+    /// Try to get a list of Settings from the global settings Entity
     /// </summary>
     public static Result<GraphSettings, IErrorBuilder> TryGetGraphSettings(Entity settings)
     {
@@ -42,14 +43,67 @@ public static class SettingsHelpers
     }
 
     /// <summary>
+    /// Forget existing connection to Microsoft 365
+    /// </summary>
+    public static async Task<Result<Unit, IError>> ForgetGraphConnection(
+        this IStateMonad stateMonad,
+        IStep callingStep)
+    {
+        await stateMonad.RemoveVariableAsync(GraphVariableName, false, callingStep);
+        return Unit.Default;
+    }
+
+    /// <summary>
+    /// This creates a new connection to Microsoft 365.
+    /// If there is a preexisting connection, it is discarded.
+    /// </summary>
+    public static async Task<Result<GraphConnection, IError>> CreateGraphConnection(
+        this IStateMonad stateMonad,
+        IStep callingStep,
+        string tokenString,
+        CancellationToken cancellationToken)
+    {
+        var graphSettings = TryGetGraphSettings(stateMonad.Settings);
+
+        if (graphSettings.IsFailure)
+            return graphSettings.ConvertFailure<GraphConnection>()
+                .MapError(x => x.WithLocation(callingStep));
+
+        var newConnection = await GraphConnection.TryCreate(graphSettings.Value, tokenString);
+
+        if (newConnection.IsFailure)
+            return newConnection.ConvertFailure<GraphConnection>()
+                .MapError(x => x.WithLocation(callingStep));
+
+        var result = await stateMonad.SetVariableAsync(
+            GraphVariableName,
+            newConnection.Value,
+            true,
+            callingStep,
+            cancellationToken
+        );
+
+        if (result.IsFailure)
+            return result.ConvertFailure<GraphConnection>();
+
+        return newConnection.Value;
+    }
+
+    /// <summary>
     /// Gets or creates a connection to Microsoft 365.
+    /// If this is the first time getting a connection, the user is required to click a link and login.
     /// </summary>
     public static async Task<Result<GraphConnection, IError>> GetOrCreateGraphConnection(
         this IStateMonad stateMonad,
-        //Func<DeviceCodeInfo, CancellationToken, Task> initGraph,
         IStep callingStep,
         CancellationToken cancellationToken)
     {
+        Task InitGraph(DeviceCodeInfo cdi, CancellationToken ct)
+        {
+            stateMonad.Log(LogLevel.Information, cdi.Message, callingStep);
+            return Task.FromResult(0);
+        }
+
         var currentConnection = stateMonad.GetVariable<GraphConnection>(GraphVariableName);
 
         if (currentConnection.IsSuccess)
@@ -61,12 +115,6 @@ public static class SettingsHelpers
             return graphSettings.ConvertFailure<GraphConnection>()
                 .MapError(x => x.WithLocation(callingStep));
 
-        Task InitGraph(DeviceCodeInfo cdi, CancellationToken ct)
-        {
-            stateMonad.Log(LogLevel.Information, cdi.Message, callingStep);
-            return Task.FromResult(0);
-        }
-
         var newConnection = await GraphConnection.TryCreate(
             graphSettings.Value,
             InitGraph,
@@ -75,8 +123,6 @@ public static class SettingsHelpers
 
         if (newConnection.IsFailure)
             return newConnection.MapError(x => x.WithLocation(callingStep));
-
-        //newConnection.Value.GraphServiceClient.
 
         var result = await stateMonad.SetVariableAsync(
             GraphVariableName,

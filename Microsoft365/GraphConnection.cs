@@ -1,5 +1,8 @@
 ﻿namespace Reductech.Sequence.Connectors.Microsoft365;
 
+/// <summary>
+/// A connection to Azure Graph
+/// </summary>
 public sealed class GraphConnection : IDisposable, IStateDisposable, ISCLObject
 {
     private GraphConnection(GraphServiceClient graphServiceClient, AccessToken accessToken)
@@ -9,6 +12,29 @@ public sealed class GraphConnection : IDisposable, IStateDisposable, ISCLObject
         AccessToken        = accessToken;
     }
 
+    /// <summary>
+    /// Create a connection from a pre-existing access token
+    /// </summary>
+    /// <returns></returns>
+    public static Task<Result<GraphConnection, IErrorBuilder>>
+        TryCreate(
+            GraphSettings settings,
+            string tokenString)
+    {
+        var accessToken = new AccessToken(tokenString, DateTime.Now + TimeSpan.FromDays(1));
+
+        var d = DelegatedTokenCredential.Create((_, _) => accessToken);
+
+        var client = new GraphServiceClient(d, settings.GraphUserScopes);
+
+        return Task.FromResult<Result<GraphConnection, IErrorBuilder>>(
+            new GraphConnection(client, accessToken)
+        );
+    }
+
+    /// <summary>
+    /// Create a graph connection by asking a user to go to a web page.
+    /// </summary>
     public static async Task<Result<GraphConnection, IErrorBuilder>>
         TryCreate(
             GraphSettings settings,
@@ -34,7 +60,14 @@ public sealed class GraphConnection : IDisposable, IStateDisposable, ISCLObject
     /// </summary>
     public bool IsDisposed { get; private set; }
 
-    public GraphServiceClient GraphServiceClient { get; private set; }
+    /// <summary>
+    /// The Graph Service Client
+    /// </summary>
+    public GraphServiceClient GraphServiceClient { get; }
+
+    /// <summary>
+    /// The Access Token
+    /// </summary>
     public AccessToken AccessToken { get; }
 
     /// <inheritdoc />
@@ -86,11 +119,13 @@ public sealed class GraphConnection : IDisposable, IStateDisposable, ISCLObject
     }
 
     /// <inheritdoc />
-    public async Task DisposeAsync(IStateMonad state)
+    public Task DisposeAsync(IStateMonad state)
     {
         if (!IsDisposed)
         {
             IsDisposed = true;
         }
+
+        return Task.CompletedTask;
     }
 }

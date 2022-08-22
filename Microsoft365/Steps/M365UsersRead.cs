@@ -5,7 +5,7 @@ namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
 /// <summary>
 /// Read a list of users from Microsoft 365
 /// </summary>
-public class M365UsersRead : CompoundStep<Array<Entity>>
+public sealed class M365UsersRead : CompoundStep<Array<Entity>>
 {
     /// <inheritdoc />
     public override IEnumerable<Requirement> RuntimeRequirements
