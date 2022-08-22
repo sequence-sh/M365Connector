@@ -13,9 +13,17 @@ public abstract partial class
     const string ClientId = "2e76c99d-733b-45cb-81f9-b61ea87f6389";
 
     public GraphSettings UnitTestSettings { get; }
-        = new(TenantId, ClientId,
-              new[] { "user.read", "mail.read", "mail.send" }
-            );
+        = new(
+            TenantId,
+            ClientId,
+            new[]
+            {
+                //"user.read",
+                "mail.read",
+                //"mail.send",
+                "user.ReadBasic.all"
+            }
+        );
 
     public StepFactoryStore IntegrationTestSettingsSFS => SettingsHelpers.CreateStepFactoryStore(
         UnitTestSettings,

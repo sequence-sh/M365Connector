@@ -1,20 +1,23 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Graph;
-using Reductech.Sequence.Core.Internal;
-using Reductech.Sequence.Core;
-using Reductech.Sequence.Core.Attributes;
-using Reductech.Sequence.Core.Internal.Errors;
-using Reductech.Sequence.Core.Util;
-using Entity = Reductech.Sequence.Core.Entity;
+﻿using System.Collections.Generic;
 
 namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
 
+/// <summary>
+/// Read User mail from Microsoft 365. 
+/// </summary>
 public class M365MailRead : CompoundStep<Array<Entity>>
 {
     /// <inheritdoc />
-    protected override async Task<CSharpFunctionalExtensions.Result<Array<Entity>, IError>> Run(
+    public override IEnumerable<Requirement> RuntimeRequirements
+    {
+        get
+        {
+            yield return new GraphScopeRequirement("Mail.Read");
+        }
+    }
+
+    /// <inheritdoc />
+    protected override async Task<Result<Array<Entity>, IError>> Run(
         IStateMonad stateMonad,
         CancellationToken cancellationToken)
     {

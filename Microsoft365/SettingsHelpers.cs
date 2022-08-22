@@ -1,17 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.Identity;
 using CSharpFunctionalExtensions;
 using Microsoft.Extensions.Logging;
 using Reductech.Sequence.ConnectorManagement.Base;
-using Reductech.Sequence.Core;
 using Reductech.Sequence.Core.Abstractions;
-using Reductech.Sequence.Core.Internal;
-using Reductech.Sequence.Core.Internal.Errors;
-using Entity = Reductech.Sequence.Core.Entity;
 
 namespace Reductech.Sequence.Connectors.Microsoft365;
 

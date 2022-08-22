@@ -1,26 +1,12 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Azure.Core;
-using Azure.Identity;
-using CSharpFunctionalExtensions;
-using Microsoft.Graph;
-using Reductech.Sequence.Core;
-using Reductech.Sequence.Core.Entities.Schema;
-using Reductech.Sequence.Core.Internal;
-using Reductech.Sequence.Core.Internal.Errors;
-
-namespace Reductech.Sequence.Connectors.Microsoft365;
-
-public sealed record GraphSettings
-    (string TenantId, string ClientId, string[]? GraphUserScopes) : IEntityConvertible;
+﻿namespace Reductech.Sequence.Connectors.Microsoft365;
 
 public sealed class GraphConnection : IDisposable, IStateDisposable, ISCLObject
 {
-    private GraphConnection(GraphServiceClient graphServiceClient)
+    private GraphConnection(GraphServiceClient graphServiceClient, AccessToken accessToken)
     {
         IsDisposed         = false;
         GraphServiceClient = graphServiceClient;
+        AccessToken        = accessToken;
     }
 
     public static async Task<Result<GraphConnection, IErrorBuilder>>
@@ -40,7 +26,7 @@ public sealed class GraphConnection : IDisposable, IStateDisposable, ISCLObject
 
         var gsc = new GraphServiceClient(deviceCodeCredential, settings.GraphUserScopes);
 
-        return new GraphConnection(gsc);
+        return new GraphConnection(gsc, response);
     }
 
     /// <summary>
@@ -49,6 +35,7 @@ public sealed class GraphConnection : IDisposable, IStateDisposable, ISCLObject
     public bool IsDisposed { get; private set; }
 
     public GraphServiceClient GraphServiceClient { get; private set; }
+    public AccessToken AccessToken { get; }
 
     /// <inheritdoc />
     public string Serialize(SerializeOptions options)

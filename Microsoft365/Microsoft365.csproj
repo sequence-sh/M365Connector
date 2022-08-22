@@ -57,10 +57,6 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\core\Core\Core.csproj" />
-  </ItemGroup>
-
   <PropertyGroup Condition="$(PackConnector) != ''">
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
