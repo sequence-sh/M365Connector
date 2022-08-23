@@ -52,7 +52,7 @@
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.6.1" />
     <PackageReference Include="Microsoft.Graph" Version="4.36.0" />
-    <PackageReference Include="Reductech.Sequence.Core" Version="0.16.0">
+    <PackageReference Include="Reductech.Sequence.Core" Version="0.17.0-a.main.2208220110">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
   </ItemGroup>

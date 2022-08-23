@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Reductech.Sequence.Connectors.Microsoft365.Steps;
 using Reductech.Sequence.Core;
+using Reductech.Sequence.Core.Internal;
 using Reductech.Sequence.Core.Steps;
 
 namespace Reductech.Sequence.Connectors.Microsoft365.Tests.Steps;
@@ -25,12 +26,16 @@ public partial class
         {
             yield return new IntegrationTestCase(
                 "Single Property",
+                new M365Login() { Token = new SCLConstant<StringStream>(Token) },
                 new Log()
                 {
-                    Value = new M365TeamsRead()
-                    {
-                        //Stream = StaticHelpers.Constant("{\"Foo\":1}")
-                    }
+                    Value =
+                        new EntityFormat()
+                        {
+                            Entity = new OneOfStep<Entity, Array<Entity>>(
+                                new M365TeamsRead() { }
+                            )
+                        }
                 }
             ) { IgnoreLoggedValues = true, };
         }

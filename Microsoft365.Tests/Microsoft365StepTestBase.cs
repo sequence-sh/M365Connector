@@ -12,6 +12,9 @@ public abstract partial class
     const string TenantId = "d994faac-8ca0-4e79-9892-49bccf16bb6d";
     const string ClientId = "2e76c99d-733b-45cb-81f9-b61ea87f6389";
 
+    protected const string Token =
+        @"abc";
+
     public GraphSettings UnitTestSettings { get; }
         = new(
             TenantId,
@@ -21,7 +24,8 @@ public abstract partial class
                 //"user.read",
                 "mail.read",
                 //"mail.send",
-                "user.ReadBasic.all", "Team.ReadBasic.all", "Chat.Read",
+                "user.ReadBasic.all", "Team.ReadBasic.all", "Chat.Read", "Channel.ReadBasic.All",
+                "ChannelMessage.Read.All"
             }
         );
 

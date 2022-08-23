@@ -52,7 +52,7 @@ public sealed class M365ChatsRead : CompoundStep<Array<Entity>>
     }
 
     /// <summary>
-    /// The number of results to take at once
+    /// The number of results to take at once. At most 50.
     /// </summary>
     [StepProperty(1)]
     [DefaultValueExplanation("25")]

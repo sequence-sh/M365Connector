@@ -1,4 +1,6 @@
-﻿namespace Reductech.Sequence.Connectors.Microsoft365;
+﻿//using Microsoft.Graph.Models;
+
+namespace Reductech.Sequence.Connectors.Microsoft365;
 
 /// <summary>
 /// Methods to convert Microsoft Graph Objects to SCL Entities
@@ -36,12 +38,25 @@ public static class EntityConversion
     }
 
     /// <summary>
+    /// Convert this channel to an entity
+    /// </summary>
+    public static Entity ToEntity(this Channel channel)
+    {
+        return Entity.Create(
+            (nameof(Channel.Id), channel.Id),
+            (nameof(Channel.Description), channel.Description),
+            (nameof(Channel.DisplayName), channel.DisplayName)
+        );
+    }
+
+    /// <summary>
     /// Convert this team to an entity
     /// </summary>
     public static Entity ToEntity(this Team team)
     {
         //m.DisplayName, m.Description, m.Members
         return Entity.Create(
+            (nameof(Team.Id), team.Id),
             (nameof(Team.DisplayName), team.DisplayName),
             (nameof(Team.Description), team.Description),
             (nameof(Team.Members), team.Members?.Select(member => member.ToEntity()))
@@ -78,11 +93,13 @@ public static class EntityConversion
     /// </summary>
     public static Entity ToEntity(this ChatMessage message)
     {
+        //TODO get replies
+
         return Entity.Create(
             (nameof(ChatMessage.Subject), message.Subject),
             (nameof(ChatMessage.Summary), message.Summary),
             (nameof(ChatMessage.Body), message.Body?.Content),
-            (nameof(ChatMessage.From), message.From.User.ToEntity())
+            (nameof(ChatMessage.From), message.From?.User.ToEntity())
         );
     }
 }
