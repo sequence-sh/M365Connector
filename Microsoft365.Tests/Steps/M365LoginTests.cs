@@ -3,11 +3,12 @@ using Reductech.Sequence.Connectors.Microsoft365.Steps;
 using Reductech.Sequence.Core;
 using Reductech.Sequence.Core.Internal;
 using Reductech.Sequence.Core.Steps;
+using Reductech.Sequence.Core.Util;
 
 namespace Reductech.Sequence.Connectors.Microsoft365.Tests.Steps;
 
 public partial class
-    M365LoginTests : Microsoft365StepTestBase<M365UsersRead, Array<Entity>>
+    M365LoginTests : Microsoft365StepTestBase<M365Login, Unit>
 {
     /// <inheritdoc />
     protected override IEnumerable<StepCase> StepCases
