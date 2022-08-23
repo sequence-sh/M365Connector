@@ -9,7 +9,7 @@ namespace Reductech.Sequence.Connectors.Microsoft365.Tests;
 public class MetaTests : MetaTestsBase
 {
     /// <inheritdoc />
-    public override Assembly StepAssembly => typeof(ConvertJsonToEntity).Assembly;
+    public override Assembly StepAssembly => typeof(GraphConnection).Assembly;
 
     /// <inheritdoc />
     public override Assembly TestAssembly => typeof(MetaTests).Assembly;
