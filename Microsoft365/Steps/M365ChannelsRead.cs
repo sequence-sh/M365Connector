@@ -4,6 +4,7 @@ namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
 
 /// <summary>
 /// Reads M365 Channels
+/// Uses /teams/{teamId}/allChannels endpoint
 /// </summary>
 public sealed class M365ChannelsRead : CompoundStep<Array<Entity>>
 {
