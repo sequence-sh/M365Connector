@@ -1,39 +1,41 @@
-# Sequence® Microsoft365 Connector
+# Sequence® Connector for Microsoft 365
 
-[Sequence®](https://sequence.sh) is a collection of libraries for
-automation of cross-application e-discovery and forensic workflows.
+The Sequence Connector for Microsoft 365 allows users to automate ediscovery
+and forensic workflows that use [Microsoft Graph](https://docs.microsoft.com/en-us/graph/).
 
-This connector contains Steps to interact with the
-[Microsoft Graph API](https://developer.microsoft.com/en-us/graph).
+This connector has [Steps](https://sequence.sh/steps/Microsoft365) to:
 
-## Steps
+- Read Email
+- Read Chats
+- List Users
+- List Teams
+- List Channels of a Team
+- Read messages in a channel
 
-|         Step          | Description                                    | Result Type |
-| :-------------------: | :--------------------------------------------- | :---------: |
-| `ConvertJsonToEntity` | Converts a JSON string or stream to an entity. |  `Entity`   |
+## Connector Settings
 
-## Examples
+The Sequence Connector for Microsoft 365® requires additional configuration
+which can be provided using the `settings` key in `connectors.json`.
 
-To check if a file exists and print the result:
+### Supported Settings
 
-```scala
-- Print (ConvertJsonToEntity '{"Foo":1}')
-```
+| Name               | Required |   Type   | Description                                                                             |
+| :----------------- | :------: | :------: | :-------------------------------------------------------------------------------------- |
+| TenantId |    ✔     | `string` |Directory Id of the application
+| ClientId |    ✔     | `string` | Application Id                                                  |
+| GraphUserScopes                |    ✔     | `string[]` | Permission scopes to use. Each step has its own required scopes                                                |
 
-## Settings
-
-To use the Microsoft365 Connector you need to add a `settings` block to
-the `microsoft365` connector configuration in the `connectors.json` file:
+### Example `connectors.json` Entry
 
 ```json
-{
-  "Reductech.Sequence.Connectors.Microsoft365": {
-    "id": "Reductech.Sequence.Connectors.Microsoft365",
-    "version": "0.17.0",
-    "enabled": true,
-    "settings": {
-        ...
-    }
+"Reductech.Sequence.Connectors.Microsoft365": {
+  "id": "Reductech.Sequence.Connectors.Microsoft365",
+  "enable": true,
+  "version": "0.17.0",
+  "settings": {
+    "TenantId": "abc123",
+    "ClientId": "def456",
+    "GraphUserScopes": ["read-mail"],
   }
 }
 ```
@@ -50,10 +52,18 @@ https://sequence.sh/download
 
 https://sequence.sh/playground
 
+
 # Package Releases
 
-Can be downloaded from the [Releases page](https://gitlab.com/reductech/sequence/connectors/filesystem/-/releases).
+Can be downloaded from the [Releases page](https://gitlab.com/reductech/sequence/connectors/microsoft365/-/releases).
 
 # NuGet Packages
 
 Release nuget packages are available from [nuget.org](https://www.nuget.org/profiles/Sequence).
+
+## Licensing
+
+This product is licensed under the Apache License, Version 2.0.
+For further details please see http://www.apache.org/licenses/LICENSE-2.0.
+
+Microsoft does not test, evaluate, endorse or certify this product.
