@@ -5,12 +5,20 @@ and forensic workflows that use [Microsoft Graph](https://docs.microsoft.com/en-
 
 This connector has [Steps](https://sequence.sh/steps/Microsoft365) to:
 
-- Read Email
-- Read Chats
-- List Users
-- List Teams
-- List Channels of a Team
-- Read messages in a channel
+-   Read Email
+-   Read Chats
+-   List Users
+-   List Teams
+-   List Channels of a Team
+-   Read messages in a channel
+
+## Authentication
+
+Using this connector requires authenticating with Microsoft 365.  
+There are two ways to do this:
+
+-   Use steps as normal. The first time you use a step which requires authentication, a message will be logged containing a url and a code. Follow the url, enter the code and login to authenticate.
+-   Create a token by logging in previously and supply this token as a parameter to `M365Login`
 
 ## Connector Settings
 
@@ -19,11 +27,13 @@ which can be provided using the `settings` key in `connectors.json`.
 
 ### Supported Settings
 
-| Name               | Required |   Type   | Description                                                                             |
-| :----------------- | :------: | :------: | :-------------------------------------------------------------------------------------- |
-| TenantId |    ✔     | `string` |Directory Id of the application
-| ClientId |    ✔     | `string` | Application Id                                                  |
-| GraphUserScopes                |    ✔     | `string[]` | Permission scopes to use. Each step has its own required scopes                                                |
+| Name            | Required |    Type    | Description                                                     |
+| :-------------- | :------: | :--------: | :-------------------------------------------------------------- |
+| TenantId        |    ✔     |  `string`  | Directory Id of the application                                 |
+| ClientId        |    ✔     |  `string`  | Application Id                                                  |
+| GraphUserScopes |    ✔     | `string[]` | Permission scopes to use. Each step has its own required scopes |
+
+If you do not have the Tenant and Client Ids you may have to create an application, follow this instructions [on this page](https://docs.microsoft.com/en-us/graph/tutorials/dotnet?tabs=aad&tutorial-step=1)
 
 ### Example `connectors.json` Entry
 
@@ -35,7 +45,7 @@ which can be provided using the `settings` key in `connectors.json`.
   "settings": {
     "TenantId": "abc123",
     "ClientId": "def456",
-    "GraphUserScopes": ["read-mail"],
+    "GraphUserScopes": ["Mail.Read","User.ReadBasic.All", "Team.ReadBasic.All", "Chat.Read", "Channel.ReadBasic.All","ChannelMessage.Read.All"]
   }
 }
 ```
@@ -51,7 +61,6 @@ https://sequence.sh/download
 # Try SCL and Core
 
 https://sequence.sh/playground
-
 
 # Package Releases
 
