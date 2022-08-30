@@ -3,7 +3,8 @@
 namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
 
 /// <summary>
-/// Read User mail from Microsoft 365. 
+/// Read User mail from Microsoft 365.
+/// Uses /Chats endpoint
 /// </summary>
 public sealed class M365ChatsRead : CompoundStep<Array<Entity>>
 {

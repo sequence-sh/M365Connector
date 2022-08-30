@@ -16,7 +16,7 @@
     <Title>Sequence Microsoft365 Connector</Title>
     <Description>Sequence® Connector with steps to interact with the Microsoft 365 Graph API.</Description>
     <Product>Sequence®</Product>
-    <PackageTags>ediscovery;forensics;edrm;automation;orchestration;sequence;microsoft365;office365</PackageTags>
+    <PackageTags>ediscovery;forensics;edrm;automation;orchestration;sequence;microsoft365;office365;microsoftgraph;graph;graphapi</PackageTags>
 
     <PackageProjectUrl>https://sequence.sh</PackageProjectUrl>
     <RepositoryUrl>https://gitlab.com/reductech/sequence/connectors/microsoft365.git</RepositoryUrl>

@@ -4,6 +4,7 @@ namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
 
 /// <summary>
 /// Read a list of users from Microsoft 365
+/// Uses /users endpoint
 /// </summary>
 public sealed class M365UsersRead : CompoundStep<Array<Entity>>
 {

@@ -3,7 +3,8 @@
 namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
 
 /// <summary>
-/// Read User mail from Microsoft 365. 
+/// Read User mail from Microsoft 365.
+/// Uses /me/mailFolders('{Folder}')/messages endpoint
 /// </summary>
 public sealed class M365MailRead : CompoundStep<Array<Entity>>
 {

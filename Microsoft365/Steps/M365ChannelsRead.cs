@@ -1,10 +1,22 @@
-﻿namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
+﻿using System.Collections.Generic;
+
+namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
 
 /// <summary>
 /// Reads M365 Channels
+/// Uses /teams/{teamId}/allChannels endpoint
 /// </summary>
 public sealed class M365ChannelsRead : CompoundStep<Array<Entity>>
 {
+    /// <inheritdoc />
+    public override IEnumerable<Requirement> RuntimeRequirements
+    {
+        get
+        {
+            yield return new GraphScopeRequirement("Channel.ReadBasic.All");
+        }
+    }
+
     /// <inheritdoc />
     protected override async Task<Result<Array<Entity>, IError>> Run(
         IStateMonad stateMonad,
