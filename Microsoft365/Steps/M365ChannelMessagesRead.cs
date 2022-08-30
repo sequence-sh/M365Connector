@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 
 namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
 
@@ -7,6 +7,15 @@ namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
 /// </summary>
 public sealed class M365ChannelMessagesRead : CompoundStep<Array<Entity>>
 {
+    /// <inheritdoc />
+    public override IEnumerable<Requirement> RuntimeRequirements
+    {
+        get
+        {
+            yield return new GraphScopeRequirement("ChannelMessage.Read.All");
+        }
+    }
+
     /// <inheritdoc />
     protected override async Task<Result<Array<Entity>, IError>> Run(
         IStateMonad stateMonad,
