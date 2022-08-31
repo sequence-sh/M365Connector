@@ -47,7 +47,14 @@ instructions [on this page](https://docs.microsoft.com/en-us/graph/tutorials/dot
   "settings": {
     "TenantId": "abc123",
     "ClientId": "def456",
-    "GraphUserScopes": ["Mail.Read","User.ReadBasic.All", "Team.ReadBasic.All", "Chat.Read", "Channel.ReadBasic.All","ChannelMessage.Read.All"]
+    "GraphUserScopes": [
+      "Mail.Read",
+      "User.ReadBasic.All",
+      "Team.ReadBasic.All",
+      "Chat.Read",
+      "Channel.ReadBasic.All",
+      "ChannelMessage.Read.All"
+    ]
   }
 }
 ```
