@@ -52,23 +52,23 @@ instructions [on this page](https://docs.microsoft.com/en-us/graph/tutorials/dot
 }
 ```
 
-# Documentation
+## Documentation
 
 https://sequence.sh
 
-# Download
+## Download
 
 https://sequence.sh/download
 
-# Try SCL and Core
+## Try SCL and Core
 
 https://sequence.sh/playground
 
-# Package Releases
+## Package Releases
 
 Can be downloaded from the [Releases page](https://gitlab.com/reductech/sequence/connectors/microsoft365/-/releases).
 
-# NuGet Packages
+## NuGet Packages
 
 Release nuget packages are available from [nuget.org](https://www.nuget.org/profiles/Sequence).
 
