@@ -33,7 +33,11 @@ public sealed class M365MailRead : CompoundStep<Array<Entity>>
 
         var (folder, take) = data.Value;
 
-        var connection = await stateMonad.GetOrCreateGraphConnection(this, cancellationToken);
+        var connection = await stateMonad.GetOrCreateGraphConnection(
+            this,
+            SettingsHelpers.DefaultInitGraph,
+            cancellationToken
+        );
 
         if (connection.IsFailure)
             return connection.ConvertFailure<Array<Entity>>();

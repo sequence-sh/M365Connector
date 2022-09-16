@@ -35,6 +35,35 @@ public partial class
                     }
                 }
             ) { IgnoreLoggedValues = true, };
+
+            yield return new IntegrationTestCase(
+                "Login with token and list users",
+                new M365Login()
+                {
+                    HandleLogin = new LambdaFunction<Entity, Unit>(
+                        VariableName.Item,
+                        new Log()
+                        {
+                            Value = new EntityFormat
+                            {
+                                Entity = new OneOfStep<Entity, Array<Entity>>(
+                                    new GetVariable<Entity>()
+                                    {
+                                        Variable = VariableName.Item
+                                    }
+                                )
+                            }
+                        }
+                    )
+                },
+                new Log()
+                {
+                    Value = new M365UsersRead()
+                    {
+                        //Stream = StaticHelpers.Constant("{\"Foo\":1}")
+                    }
+                }
+            ) { IgnoreLoggedValues = true, };
         }
     }
 }
