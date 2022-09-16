@@ -35,7 +35,11 @@ public sealed class M365ChannelMessagesRead : CompoundStep<Array<Entity>>
 
         var (teamId, teamName, channelId, channelName) = data.Value;
 
-        var connection = await stateMonad.GetOrCreateGraphConnection(this, cancellationToken);
+        var connection = await stateMonad.GetOrCreateGraphConnection(
+            this,
+            SettingsHelpers.DefaultInitGraph,
+            cancellationToken
+        );
 
         if (connection.IsFailure)
             return connection.ConvertFailure<Array<Entity>>();

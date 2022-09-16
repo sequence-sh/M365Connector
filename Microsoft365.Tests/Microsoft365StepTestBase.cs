@@ -9,8 +9,8 @@ public abstract partial class
     where TStep : class, ICompoundStep<TOutput>, new()
     where TOutput : ISCLObject
 {
-    const string TenantId = "d994faac-8ca0-4e79-9892-49bccf16bb6d";
-    const string ClientId = "2e76c99d-733b-45cb-81f9-b61ea87f6389";
+    const string TenantId = "619bb56e-b872-40de-aa44-d5123e737a9a";
+    const string ClientId = "b1ebd1c5-f502-4b24-b595-1e4d0c9c16d8";
 
     protected const string Token =
         @"abc";

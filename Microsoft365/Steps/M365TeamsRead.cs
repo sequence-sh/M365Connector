@@ -22,7 +22,11 @@ public sealed class M365TeamsRead : CompoundStep<Array<Entity>>
         IStateMonad stateMonad,
         CancellationToken cancellationToken)
     {
-        var connection = await stateMonad.GetOrCreateGraphConnection(this, cancellationToken);
+        var connection = await stateMonad.GetOrCreateGraphConnection(
+            this,
+            SettingsHelpers.DefaultInitGraph,
+            cancellationToken
+        );
 
         if (connection.IsFailure)
             return connection.ConvertFailure<Array<Entity>>();
