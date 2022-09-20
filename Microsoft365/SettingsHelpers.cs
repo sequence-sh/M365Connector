@@ -90,20 +90,29 @@ public static class SettingsHelpers
     }
 
     /// <summary>
+    /// The default InitGraph function
+    /// </summary>
+    /// <returns></returns>
+    public static Task DefaultInitGraph(
+        DeviceCodeInfo cdi,
+        IStateMonad stateMonad,
+        IStep callingStep,
+        CancellationToken _)
+    {
+        stateMonad.Log(LogLevel.Information, cdi.Message, callingStep);
+        return Task.FromResult(0);
+    }
+
+    /// <summary>
     /// Gets or creates a connection to Microsoft 365.
     /// If this is the first time getting a connection, the user is required to click a link and login.
     /// </summary>
     public static async Task<Result<GraphConnection, IError>> GetOrCreateGraphConnection(
         this IStateMonad stateMonad,
         IStep callingStep,
+        Func<DeviceCodeInfo, IStateMonad, IStep, CancellationToken, Task> initGraph,
         CancellationToken cancellationToken)
     {
-        Task InitGraph(DeviceCodeInfo cdi, CancellationToken ct)
-        {
-            stateMonad.Log(LogLevel.Information, cdi.Message, callingStep);
-            return Task.FromResult(0);
-        }
-
         var currentConnection = stateMonad.GetVariable<GraphConnection>(GraphVariableName);
 
         if (currentConnection.IsSuccess)
@@ -117,7 +126,7 @@ public static class SettingsHelpers
 
         var newConnection = await GraphConnection.TryCreate(
             graphSettings.Value,
-            InitGraph,
+            (info, token) => initGraph(info, stateMonad, callingStep, token),
             cancellationToken
         );
 

@@ -10,7 +10,11 @@ public sealed class M365GetToken : CompoundStep<StringStream>
         IStateMonad stateMonad,
         CancellationToken cancellationToken)
     {
-        var connection = await stateMonad.GetOrCreateGraphConnection(this, cancellationToken);
+        var connection = await stateMonad.GetOrCreateGraphConnection(
+            this,
+            SettingsHelpers.DefaultInitGraph,
+            cancellationToken
+        );
 
         if (connection.IsFailure)
             return connection.ConvertFailure<StringStream>();
