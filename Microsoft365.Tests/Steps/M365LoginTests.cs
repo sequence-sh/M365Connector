@@ -65,7 +65,7 @@ public partial class
             ) { IgnoreLoggedValues = true, };
 
             yield return new IntegrationTestCase(
-                "Login with token and list users",
+                "Login with function and list users",
                 new M365Login()
                 {
                     HandleLogin = new LambdaFunction<Entity, Unit>(
