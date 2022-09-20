@@ -118,5 +118,20 @@ public sealed class M365Login : CompoundStep<Unit>
     public LambdaFunction<Entity, Unit>? HandleLogin { get; set; } = null!;
 
     /// <inheritdoc />
+    public override Result<Unit, IError> VerifyThis(StepFactoryStore stepFactoryStore)
+    {
+        if (Token is not null && HandleLogin is not null)
+        {
+            return ErrorCode.ConflictingParameters.ToErrorBuilder(
+                    nameof(Token),
+                    nameof(HandleLogin)
+                )
+                .WithLocationSingle(this);
+        }
+
+        return base.VerifyThis(stepFactoryStore);
+    }
+
+    /// <inheritdoc />
     public override IStepFactory StepFactory { get; } = new SimpleStepFactory<M365Login, Unit>();
 }
