@@ -111,6 +111,7 @@ public sealed class M365Login : CompoundStep<Unit>
 
     /// <summary>
     /// How to handle the login url and code.
+    /// The function takes an entity with the all the relevant properties, particularly 'VerificationUri' and 'UserCode'
     /// If neither this nor the Token is set, the token and code will be logged.
     /// </summary>
     [FunctionProperty]
