@@ -105,7 +105,11 @@ public abstract partial class Microsoft365StepTestBase<TStep, TOutput>
 
             deserializedStep.ShouldBeSuccessful();
 
-            var unfrozenStep = deserializedStep.Value.TryFreeze(SCLRunner.RootCallerMetadata, sfs);
+            var unfrozenStep = deserializedStep.Value.TryFreeze(
+                SCLRunner.RootCallerMetadata,
+                sfs,
+                new OptimizationSettings(true, true, InjectedVariables)
+            );
 
             unfrozenStep.ShouldBeSuccessful();
 
