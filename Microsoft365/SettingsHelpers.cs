@@ -25,7 +25,7 @@ public static class SettingsHelpers
     public static Result<GraphSettings, IErrorBuilder> TryGetGraphSettings(Entity settings)
     {
         var m365Connector = settings.TryGetValue(
-            new EntityPropertyKey(
+            new EntityNestedKey(
                 StateMonad.ConnectorsKey,
                 M365Key,
                 nameof(ConnectorData.ConnectorSettings.Settings)
@@ -159,7 +159,11 @@ public static class SettingsHelpers
         var ns = ConnectorSettings.DefaultForAssembly(assembly!);
 
         ns.Settings = graphSettings.ConvertToEntity()
-            .Dictionary.ToDictionary(k => k.Key, v => v.Value.Value.ToCSharpObject()!);
+            .ToDictionary(
+                k => k.Key.Inner,
+                v => v.Value.ToCSharpObject(),
+                StringComparer.OrdinalIgnoreCase
+            )!;
 
         var core = Assembly.GetAssembly(typeof(IStep));
 

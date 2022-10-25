@@ -119,13 +119,13 @@ public sealed class GraphConnection : IDisposable, IStateDisposable, ISCLObject
     }
 
     /// <inheritdoc />
-    public Task DisposeAsync(IStateMonad state)
+    public ValueTask DisposeAsync(IStateMonad state)
     {
         if (!IsDisposed)
         {
             IsDisposed = true;
         }
 
-        return Task.CompletedTask;
+        return ValueTask.CompletedTask;
     }
 }

@@ -9,7 +9,7 @@ namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
 public sealed class M365Login : CompoundStep<Unit>
 {
     /// <inheritdoc />
-    protected override async Task<Result<Unit, IError>> Run(
+    protected override async ValueTask<Result<Unit, IError>> Run(
         IStateMonad stateMonad,
         CancellationToken cancellationToken)
     {
@@ -44,30 +44,30 @@ public sealed class M365Login : CompoundStep<Unit>
                 function = async (deviceCodeInfo, monad, _, token) =>
                 {
                     var entity = Entity.Create(
-                        new (EntityPropertyKey key, ISCLObject value)[]
+                        new (EntityNestedKey key, ISCLObject value)[]
                         {
                             new(
-                                EntityPropertyKey.Create(nameof(DeviceCodeInfo.ClientId)),
+                                EntityNestedKey.Create(nameof(DeviceCodeInfo.ClientId)),
                                 new StringStream(deviceCodeInfo.ClientId)
                             ),
                             new(
-                                EntityPropertyKey.Create(nameof(DeviceCodeInfo.DeviceCode)),
+                                EntityNestedKey.Create(nameof(DeviceCodeInfo.DeviceCode)),
                                 new StringStream(deviceCodeInfo.DeviceCode)
                             ),
                             new(
-                                EntityPropertyKey.Create(nameof(DeviceCodeInfo.Message)),
+                                EntityNestedKey.Create(nameof(DeviceCodeInfo.Message)),
                                 new StringStream(deviceCodeInfo.Message)
                             ),
                             new(
-                                EntityPropertyKey.Create(nameof(DeviceCodeInfo.UserCode)),
+                                EntityNestedKey.Create(nameof(DeviceCodeInfo.UserCode)),
                                 new StringStream(deviceCodeInfo.UserCode)
                             ),
                             new(
-                                EntityPropertyKey.Create(nameof(DeviceCodeInfo.VerificationUri)),
+                                EntityNestedKey.Create(nameof(DeviceCodeInfo.VerificationUri)),
                                 new StringStream(deviceCodeInfo.VerificationUri.OriginalString)
                             ),
                             new(
-                                EntityPropertyKey.Create(nameof(DeviceCodeInfo.ExpiresOn)),
+                                EntityNestedKey.Create(nameof(DeviceCodeInfo.ExpiresOn)),
                                 new SCLDateTime(deviceCodeInfo.ExpiresOn.Date)
                             ),
                         }
