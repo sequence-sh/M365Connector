@@ -1,4 +1,4 @@
-# Sequence® Connector for Microsoft 365
+# Sequence Microsoft 365 Connector
 
 The Sequence Connector for Microsoft 365 allows users to automate ediscovery
 and forensic workflows that use [Microsoft Graph](https://docs.microsoft.com/en-us/graph/).
@@ -40,8 +40,8 @@ instructions [on this page](https://docs.microsoft.com/en-us/graph/tutorials/dot
 ### Example `connectors.json` Entry
 
 ```json
-"Reductech.Sequence.Connectors.Microsoft365": {
-  "id": "Reductech.Sequence.Connectors.Microsoft365",
+"Sequence.Connectors.Microsoft365": {
+  "id": "Sequence.Connectors.Microsoft365",
   "enable": true,
   "version": "0.17.0",
   "settings": {
@@ -73,7 +73,7 @@ https://sequence.sh/playground
 
 ## Package Releases
 
-Can be downloaded from the [Releases page](https://gitlab.com/reductech/sequence/connectors/microsoft365/-/releases).
+Can be downloaded from the [Releases page](https://gitlab.com/sequence/connectors/microsoft365/-/releases).
 
 ## NuGet Packages
 

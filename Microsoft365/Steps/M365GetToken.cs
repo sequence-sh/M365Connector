@@ -1,4 +1,4 @@
-﻿namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
+﻿namespace Sequence.Connectors.Microsoft365.Steps;
 
 /// <summary>
 /// Gets the M365 Token that was used to login.

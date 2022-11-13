@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Reductech.Sequence.ConnectorManagement.Base;
+using Sequence.ConnectorManagement.Base;
 
-namespace Reductech.Sequence.Connectors.Microsoft365;
+namespace Sequence.Connectors.Microsoft365;
 
 /// <summary>
 /// This step requires a particular Graph Score

@@ -4,27 +4,27 @@
     <TargetFramework>net6.0</TargetFramework>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <RootNamespace>Reductech.Sequence.Connectors.Microsoft365</RootNamespace>
-    <AssemblyName>Reductech.Sequence.Connectors.Microsoft365</AssemblyName>
+    <RootNamespace>Sequence.Connectors.Microsoft365</RootNamespace>
+    <AssemblyName>Sequence.Connectors.Microsoft365</AssemblyName>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
     <Nullable>enable</Nullable>
     <Version>0.18.0$(VersionSuffix)</Version>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>Reductech.Sequence.Connectors.Microsoft365</PackageId>
-    <Title>Sequence Microsoft365 Connector</Title>
-    <Description>Sequence® Connector with steps to interact with the Microsoft 365 Graph API.</Description>
+    <PackageId>Sequence.Connectors.Microsoft365</PackageId>
+    <Title>Sequence Microsoft 365 Connector</Title>
+    <Description>Sequence connector with steps to interact with the Microsoft 365 Graph API.</Description>
     <Product>Sequence®</Product>
     <PackageTags>ediscovery;forensics;edrm;automation;orchestration;sequence;microsoft365;office365;microsoftgraph;graph;graphapi</PackageTags>
 
     <PackageProjectUrl>https://sequence.sh</PackageProjectUrl>
-    <RepositoryUrl>https://gitlab.com/reductech/sequence/connectors/microsoft365.git</RepositoryUrl>
-    <PackageReleaseNotes>https://gitlab.com/reductech/sequence/connectors/microsoft365/-/blob/master/CHANGELOG.md</PackageReleaseNotes>
+    <RepositoryUrl>https://gitlab.com/sequence/connectors/microsoft365.git</RepositoryUrl>
+    <PackageReleaseNotes>https://gitlab.com/sequence/connectors/microsoft365/-/blob/master/CHANGELOG.md</PackageReleaseNotes>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
 
-    <Authors>Reductech</Authors>
+    <Authors>MarkWainwright;antonyoni</Authors>
     <Company>Reductech</Company>
     <Copyright>Copyright (c) 2022 Reductech Ltd</Copyright>
   </PropertyGroup>
@@ -52,7 +52,7 @@
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.7.0" />
     <PackageReference Include="Microsoft.Graph" Version="4.46.0" />
-    <PackageReference Include="Reductech.Sequence.Core" Version="0.18.0-a.main.2211070211">
+    <PackageReference Include="Sequence.Core" Version="0.18.0-a.main.2211102318">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
   </ItemGroup>

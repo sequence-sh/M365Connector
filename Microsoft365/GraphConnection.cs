@@ -1,4 +1,4 @@
-﻿namespace Reductech.Sequence.Connectors.Microsoft365;
+﻿namespace Sequence.Connectors.Microsoft365;
 
 /// <summary>
 /// A connection to Azure Graph

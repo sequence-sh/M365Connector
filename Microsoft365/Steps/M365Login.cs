@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 
-namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
+namespace Sequence.Connectors.Microsoft365.Steps;
 
 /// <summary>
 /// Login to M365. You do not need to do this.

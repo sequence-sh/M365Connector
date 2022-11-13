@@ -1,5 +1,5 @@
 include:
-  - project: reductech/templates/cicd/dotnet
+  - project: sequence/templates/cicd
     file: .gitlab-ci.linux.yml
 
 variables:
@@ -10,10 +10,6 @@ test dev:
   script:
     - dotnet test --no-build --configuration $CONFIG -v normal --filter "Category!=Integration"
       --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory ./
-    - >-
-      pwsh -Command '$report = Get-Content -Path "*/coverage.cobertura.xml" -Raw ;
-      $fixPaths = $report -replace "filename=`".+?${env:CI_PROJECT_NAME}(/|\\)", "filename=`"" ;
-      [System.IO.File]::WriteAllText("./coverage.$($env:CI_JOB_NAME -replace "[^\w]+", "-").xml", $fixPaths)'
 
 # Skipping mutation testing as Stryker currently doesn't support filters
 mutation testing:

@@ -1,7 +1,7 @@
 using System.Reflection;
-using Reductech.Sequence.Core.TestHarness;
+using Sequence.Core.TestHarness;
 
-namespace Reductech.Sequence.Connectors.Microsoft365.Tests;
+namespace Sequence.Connectors.Microsoft365.Tests;
 
 /// <summary>
 /// Makes sure all steps have a test class

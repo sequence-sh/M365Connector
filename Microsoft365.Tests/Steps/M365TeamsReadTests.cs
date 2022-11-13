@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Reductech.Sequence.Connectors.Microsoft365.Steps;
-using Reductech.Sequence.Core;
-using Reductech.Sequence.Core.Internal;
-using Reductech.Sequence.Core.Steps;
+using Sequence.Connectors.Microsoft365.Steps;
+using Sequence.Core;
+using Sequence.Core.Internal;
+using Sequence.Core.Steps;
 
-namespace Reductech.Sequence.Connectors.Microsoft365.Tests.Steps;
+namespace Sequence.Connectors.Microsoft365.Tests.Steps;
 
 public partial class
     M365TeamsReadTests
