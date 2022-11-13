@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using CSharpFunctionalExtensions;
-using Reductech.Sequence.Connectors.Microsoft365.Steps;
-using Reductech.Sequence.Core;
-using Reductech.Sequence.Core.Internal;
-using Reductech.Sequence.Core.Internal.Errors;
-using Reductech.Sequence.Core.Steps;
-using Reductech.Sequence.Core.Util;
-using Entity = Reductech.Sequence.Core.Entity;
+using Sequence.Connectors.Microsoft365.Steps;
+using Sequence.Core;
+using Sequence.Core.Internal;
+using Sequence.Core.Internal.Errors;
+using Sequence.Core.Steps;
+using Sequence.Core.Util;
+using Entity = Sequence.Core.Entity;
 
-namespace Reductech.Sequence.Connectors.Microsoft365.Tests.Steps;
+namespace Sequence.Connectors.Microsoft365.Tests.Steps;
 
 public partial class
     M365LoginTests : Microsoft365StepTestBase<M365Login, Unit>
@@ -31,7 +31,7 @@ public partial class
                 "No Settings",
                 new M365Login(),
                 ErrorCode.MissingStepSettings.ToErrorBuilder(
-                    "Reductech.Sequence.Connectors.Microsoft365"
+                    "Sequence.Connectors.Microsoft365"
                 )
             );
 

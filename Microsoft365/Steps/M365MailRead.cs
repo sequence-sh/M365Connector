@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
+namespace Sequence.Connectors.Microsoft365.Steps;
 
 /// <summary>
 /// Read User mail from Microsoft 365.

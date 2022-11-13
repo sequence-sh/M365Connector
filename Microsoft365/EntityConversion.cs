@@ -1,6 +1,6 @@
 ﻿//using Microsoft.Graph.Models;
 
-namespace Reductech.Sequence.Connectors.Microsoft365;
+namespace Sequence.Connectors.Microsoft365;
 
 /// <summary>
 /// Methods to convert Microsoft Graph Objects to SCL Entities

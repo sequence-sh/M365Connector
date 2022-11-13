@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Reductech.Sequence.Core.Internal;
-using Reductech.Sequence.Core.TestHarness;
+using Sequence.Core.Internal;
+using Sequence.Core.TestHarness;
 
-namespace Reductech.Sequence.Connectors.Microsoft365.Tests;
+namespace Sequence.Connectors.Microsoft365.Tests;
 
 public abstract partial class
     Microsoft365StepTestBase<TStep, TOutput> : StepTestBase<TStep, TOutput>

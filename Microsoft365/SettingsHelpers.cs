@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
-using Reductech.Sequence.ConnectorManagement.Base;
-using Reductech.Sequence.Core.Abstractions;
+using Sequence.ConnectorManagement.Base;
+using Sequence.Core.Abstractions;
 
-namespace Reductech.Sequence.Connectors.Microsoft365;
+namespace Sequence.Connectors.Microsoft365;
 
 /// <summary>
 /// Methods to help with Microsoft Graph settings
@@ -15,9 +15,9 @@ public static class SettingsHelpers
     /// The name of the Graph Variable in the SCL state
     /// </summary>
     internal static readonly VariableName GraphVariableName =
-        new("ReductechGraphConnection");
+        new("SequenceGraphConnection");
 
-    private const string M365Key = "Reductech.Sequence.Connectors.Microsoft365";
+    private const string M365Key = "Sequence.Connectors.Microsoft365";
 
     /// <summary>
     /// Try to get a list of Settings from the global settings Entity

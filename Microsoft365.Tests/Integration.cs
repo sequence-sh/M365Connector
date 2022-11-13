@@ -4,19 +4,19 @@ using System.Threading.Tasks;
 using AutoTheory;
 using CSharpFunctionalExtensions;
 using Microsoft.Extensions.Logging;
-using Reductech.Sequence.Core;
-using Reductech.Sequence.Core.Abstractions;
-using Reductech.Sequence.Core.Internal;
-using Reductech.Sequence.Core.Internal.Errors;
-using Reductech.Sequence.Core.Internal.Parser;
-using Reductech.Sequence.Core.Internal.Serialization;
-using Reductech.Sequence.Core.Steps;
-using Reductech.Sequence.Core.TestHarness;
-using Reductech.Sequence.Core.Util;
+using Sequence.Core;
+using Sequence.Core.Abstractions;
+using Sequence.Core.Internal;
+using Sequence.Core.Internal.Errors;
+using Sequence.Core.Internal.Parser;
+using Sequence.Core.Internal.Serialization;
+using Sequence.Core.Steps;
+using Sequence.Core.TestHarness;
+using Sequence.Core.Util;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Reductech.Sequence.Connectors.Microsoft365.Tests;
+namespace Sequence.Connectors.Microsoft365.Tests;
 
 [Collection("RequiresMicrosoft365Connection")]
 public abstract partial class Microsoft365StepTestBase<TStep, TOutput>

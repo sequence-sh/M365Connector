@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Reductech.Sequence.Connectors.Microsoft365.Steps;
+namespace Sequence.Connectors.Microsoft365.Steps;
 
 /// <summary>
 /// Reads M365 Channels
