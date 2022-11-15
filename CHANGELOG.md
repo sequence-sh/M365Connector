@@ -1,3 +1,20 @@
+# v0.18.0 (2022-11-14)
+
+## Summary of Changes
+
+- Sequence has a new home: https://gitlab.com/sequence
+- The namespace has been updated from `Reductech.Sequence` to `Sequence`
+
+## Issues Closed in this Release
+
+### New Features
+
+- Login must take a function to work with the login url #12
+
+### Other
+
+- Update namespace and paths after move to Sequence group #35
+
 # v0.17.0 (2022-08-29)
 
 Initial release. Versions are synced with Core. Contains steps to interact
